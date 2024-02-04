@@ -3,6 +3,11 @@ const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')
 const app = express()
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// The rest of your server setup...
+
 mongoose.connect(process.env.MONGODB_URI)
 
 app.set('view engine', 'ejs')
