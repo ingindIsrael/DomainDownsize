@@ -1,15 +1,9 @@
 {
     "version": 2,
-    "builds": [
-      {
-        "src": "views/index.ejs",
-        "use": "@vercel/node"
-      }
-    ],
     "routes": [
       {
-        "src": "/(.*)",
-        "dest": "/"
+        "src": "/",
+        "dest": "/api/shortUrls.js"
       }
     ]
   }
