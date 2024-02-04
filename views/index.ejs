@@ -4,36 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>URL Shrinker</title>
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Document</title>
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #343a40; /* Dark gray background */
+      color: #ffffff; /* White text color */
+      padding-top: 20px;
+    }
+    .container {
+      background-color: #495057; /* Slightly lighter gray for the container */
+      padding: 20px;
+      border-radius: 10px;
+    }
+    a {
+      color: #ffc107; /* Bootstrap's warning color for links to stand out */
+    }
+    a:hover {
+      color: #ffe082; /* Lighter shade for hover effect */
+    }
+    .form-control, .btn {
+      border-radius: 20px; /* Rounded borders for input and button */
+    }
+    .table-responsive {
+      background-color: #6c757d; /* Even lighter gray for table background */
+      padding: 10px;
+      border-radius: 10px;
+    }
+    th {
+      color: #dee2e6; /* Light gray text color for table headers */
+    }
+    @media (max-width: 768px) {
+    .hero-section {
+      margin: 0 !important; /* Remove margin */
+    }
+    }
+    @media (min-width: 992px) {
+    .btn-warning {
+      margin-top: 0 !important; /* Remove top margin */
+    }
+    }
+    @media (min-width: 768px) and (max-width: 991px) { 
+    .btn-warning {
+      margin-top: 0 !important; /* Remove top margin */
+    }
+    .hero-section .row .col-md-4,
+    .hero-section .row .col-md-7 {
+      /* Make both sections take equal and more width */
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    .hero-section .row {
+      /* Use this if you need to adjust alignment or spacing further */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* This centers the flex items */
+    }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>URL Shrinker</h1>
-    <form action="/shortUrls" method="POST" class="my-4 form-inline">
-      <label for="fullUrl" class="sr-only">Url</label>
-      <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2">
-      <button class="btn btn-success" type="submit">Shrink</button>
-    </form>
-    
-    <table class="table table-striped table-responsive">
-      <thead>
-        <tr>
-          <th>Full URL</th>
-          <th>Short URL</th>
-          <th>Clicks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% shortUrls.forEach(shortUrl => { %>
-          <tr>
-            <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
-            <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
-            <td><%= shortUrl.clicks %></td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
+<div class="navbar">
+    <a class="logo">
+        <img src="images/logo.png" alt="URL Shrinker Logo" style="height: 150px; border-radius: 50px; margin: 5px">
+    </a>
+    <h1>Domain Downsize</h1>
+    <nav class="my-3">
+        <a href="#" class="btn btn-light">Home</a>
+        <a href="#" class="btn btn-light">Pricing</a>
+        <a href="#" class="btn btn-light">Contact</a>
+    </nav>
+</div>
+<div class="container-fluid hero-section m-5">
+    <div class="row">
+      <div class="col-md-4 left-content">
+        <h2 class="mb-4 text-center">Make Every Link Shorter and Smarter</h2>
+        <form action="/shortUrls" method="POST" class="form-inline justify-content-center mb-4">
+          <input required type="url" name="fullUrl" id="fullUrl" class="form-control mr-2" placeholder="Enter URL here" aria-label="URL">
+          <button type="submit" class="btn btn-warning mt-3">Shrink</button>
+        </form>
+      </div>
+      <div class="col-md-7 right-content">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Full URL</th>
+                <th scope="col">Short URL</th>
+                <th scope="col">Clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% shortUrls.forEach(shortUrl => { %>
+                <tr>
+                  <td><a href="<%= shortUrl.full %>" target="_blank" rel="noopener noreferrer"><%= shortUrl.full %></a></td>
+                  <td><a href="<%= shortUrl.short %>" target="_blank" rel="noopener noreferrer"><%= shortUrl.short %></a></td>
+                  <td><%= shortUrl.clicks %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
+  
+  <!-- Bootstrap and jQuery libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/js/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
